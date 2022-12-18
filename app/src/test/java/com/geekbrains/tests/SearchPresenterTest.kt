@@ -68,8 +68,8 @@ class SearchPresenterTest {
         presenter.handleGitHubResponse(response)
 
         val inOrder = inOrder(viewContract)
-        inOrder.verify(viewContract).displayError("Response is null or unsuccessful")
         inOrder.verify(viewContract).displayLoading(false)
+        inOrder.verify(viewContract).displayError("Response is null or unsuccessful")
     }
 
     @Test
