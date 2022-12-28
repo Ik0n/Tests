@@ -2,9 +2,9 @@ package com.geekbrains.tests
 
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.model.SearchResult
-import com.geekbrains.tests.presenter.SearchPresenter
+import com.geekbrains.tests.presenter.search.SearchPresenter
 import com.geekbrains.tests.repository.GitHubRepository
-import com.geekbrains.tests.view.ViewContract
+import com.geekbrains.tests.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +21,7 @@ class SearchPresenterTest {
     private lateinit var repository: GitHubRepository
 
     @Mock
-    private lateinit var viewContract: ViewContract
+    private lateinit var viewContract: ViewSearchContract
 
     @Before
     fun setUp() {
