@@ -1,8 +1,9 @@
-package com.geekbrains.tests.view
+package com.geekbrains.tests.view.search
 
+import com.geekbrains.tests.ViewContract
 import com.geekbrains.tests.model.SearchResult
 
-internal interface ViewContract {
+internal interface ViewSearchContract : ViewContract {
     fun displaySearchResults(
         searchResults: List<SearchResult>,
         totalCount: Int
