@@ -64,6 +64,18 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
             }
             false
         })
+        searchButton.setOnClickListener {
+            val query = searchEditText.text.toString()
+            if (query.isNotBlank()) {
+                presenter.searchGitHub(query)
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.enter_search_word),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun createRepository(): RepositoryContract {
