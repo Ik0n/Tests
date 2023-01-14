@@ -7,10 +7,10 @@ import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.tests.model.SearchResult
+import com.geekbrains.tests.presenter.RepositoryContract
 import com.geekbrains.tests.presenter.search.PresenterSearchContract
 import com.geekbrains.tests.presenter.search.SearchPresenter
 import com.geekbrains.tests.repository.FakeGitHubRepository
-import com.geekbrains.tests.presenter.RepositoryContract
 import com.geekbrains.tests.view.details.DetailsActivity
 import com.geekbrains.tests.view.search.SearchResultAdapter
 import com.geekbrains.tests.view.search.ViewSearchContract

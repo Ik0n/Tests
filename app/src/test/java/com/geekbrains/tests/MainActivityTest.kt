@@ -16,7 +16,7 @@ import org.robolectric.annotation.Config
 class MainActivityTest {
 
     @Test
-    fun mainActivityEditText_IsWorking(){
+    fun mainActivityEditText_IsWorking() {
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             val editText = it.findViewById<EditText>(R.id.searchEditText)

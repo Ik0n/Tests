@@ -69,7 +69,13 @@ class MainActivityEspressoTest {
 
     @Test
     fun activityButton_IsEffectiveVisible() {
-        onView(withId(R.id.toDetailsActivityButton)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.toDetailsActivityButton)).check(
+            matches(
+                withEffectiveVisibility(
+                    Visibility.VISIBLE
+                )
+            )
+        )
     }
 
     @Test
@@ -84,7 +90,6 @@ class MainActivityEspressoTest {
             onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2283")))
         }
     }
-
 
 
     @After

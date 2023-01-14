@@ -1,6 +1,5 @@
 package com.geekbrains.tests
 
-import android.content.pm.PackageManager
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -37,7 +36,7 @@ class DetailsActivityEspressoTest {
 
     @Test
     fun activity_IsResumed() {
-        TestCase.assertEquals(Lifecycle.State.RESUMED,scenario.state)
+        TestCase.assertEquals(Lifecycle.State.RESUMED, scenario.state)
     }
 
     @Test
@@ -79,7 +78,13 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonDecrement_IsWorking() {
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_MINUS_1)))
+        onView(withId(R.id.totalCountTextView)).check(
+            matches(
+                withText(
+                    TEST_NUMBER_OF_RESULTS_MINUS_1
+                )
+            )
+        )
     }
 
 
