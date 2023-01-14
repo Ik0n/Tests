@@ -21,7 +21,7 @@ class OpenOtherAppsTest {
     @Test
     fun test_OpenSettings() {
         uiDevice.pressHome()
-        uiDevice.swipe(500,1500,500,0,5)
+        uiDevice.swipe(500, 1500, 500, 0, 5)
         val appViews = UiScrollable(UiSelector().scrollable(false))
         val settingsApp = appViews
             .getChildByText(
@@ -31,7 +31,8 @@ class OpenOtherAppsTest {
             )
         settingsApp.clickAndWaitForNewWindow()
 
-        val settingsValidation = uiDevice.findObject(UiSelector().packageName("com.android.settings"))
+        val settingsValidation =
+            uiDevice.findObject(UiSelector().packageName("com.android.settings"))
         Assert.assertTrue(settingsValidation.exists())
     }
 

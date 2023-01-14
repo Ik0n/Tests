@@ -1,7 +1,5 @@
 package com.geekbrains.tests.presenter.details
 
-import android.app.Activity
-import com.geekbrains.tests.view.details.DetailsActivity
 import com.geekbrains.tests.view.details.ViewDetailsContract
 
 internal class DetailsPresenter constructor(
