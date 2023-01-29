@@ -1,9 +1,15 @@
 package com.geekbrains.tests.presenter.search
 
+import com.geekbrains.tests.SchedulerProvider
+import com.geekbrains.tests.SearchSchedulerProvider
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.presenter.RepositoryContract
 import com.geekbrains.tests.repository.RepositoryCallback
 import com.geekbrains.tests.view.search.ViewSearchContract
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
 /**
@@ -16,12 +22,38 @@ import retrofit2.Response
 
 internal class SearchPresenter internal constructor(
     private val viewContract: ViewSearchContract,
-    private val repository: RepositoryContract
+    private val repository: RepositoryContract,
+    private val appSchedulerProvider: SchedulerProvider = SearchSchedulerProvider()
 ) : PresenterSearchContract, RepositoryCallback {
 
     override fun searchGitHub(searchQuery: String) {
-        viewContract.displayLoading(true)
-        repository.searchGithub(searchQuery, this)
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            repository.searchGithub(searchQuery)
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
+                .doOnSubscribe {  viewContract.displayLoading(true)  }
+                .doOnTerminate { viewContract.displayLoading(false) }
+                .subscribeWith(object : DisposableObserver<SearchResponse>() {
+                    override fun onNext(searchResponse: SearchResponse) {
+                        val searchResult = searchResponse.searchResults
+                        val totalCount = searchResponse.totalCount
+                        if  (searchResult != null && totalCount != null) {
+                            viewContract.displaySearchResults(searchResult, totalCount)
+                        } else {
+                            viewContract.displayError("Search results or total count are null")
+                        }
+                    }
+
+                    override fun onError(e: Throwable) {
+                        viewContract.displayError(e.message ?: "Response is null or unsuccessful")
+                    }
+
+                    override fun onComplete() {
+                    }
+
+                })
+        )
     }
 
 
